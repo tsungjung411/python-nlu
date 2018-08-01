@@ -6,7 +6,7 @@ class TaggerManager:
     A utiltity to manage tagger.
     
     @since 2018.07.17
-    @author tsungjung411
+    @author tsungjung411@gmail.com
     '''
     __instance = None
     __tagger_list = None
