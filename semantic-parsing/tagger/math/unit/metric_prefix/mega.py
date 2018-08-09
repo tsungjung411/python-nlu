@@ -1,4 +1,4 @@
-from tagger.math.unit.metric_prefix.metric_prefix_unit import _MetricPrefixUnit
+from tagger.math.unit.metric_prefix._metric_prefix_unit import _MetricPrefixUnit
 
 class mega(_MetricPrefixUnit):
     '''

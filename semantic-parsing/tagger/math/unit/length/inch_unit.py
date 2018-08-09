@@ -1,5 +1,4 @@
-from concept import Concept
-from tagger.math.unit.length.length_unit import _LengthUnit
+from tagger.math.unit.length._length_unit import _LengthUnit
 
 class InchUnit(_LengthUnit):
     '''

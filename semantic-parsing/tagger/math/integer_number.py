@@ -1,5 +1,5 @@
 from concept import Concept
-from tagger.tagger import _Tagger
+from tagger._tagger import _Tagger
 
 class IntegerNumber(_Tagger):
     '''
@@ -30,7 +30,7 @@ class IntegerNumber(_Tagger):
                 ch = chr(ord(ch) - ord('０') + ord('0'))
                 
                 # update back to the source
-                sentence.char_list[i] = ch
+                sentence[i] = ch
             # end-of-if
             
             if '0' <= ch and ch <= '9':
