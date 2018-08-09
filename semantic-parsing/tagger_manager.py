@@ -133,6 +133,7 @@ class TaggerManager:
            - class[1]: <class 'tagger.math.integer_number.IntegerNumber'>
            - class[2]: <class 'tagger.math.real_number.RealNumber'>
         '''
+        
         file_name_without_extension = file_name.split('.')[0]
         module_name = parent_module_name + '.' + file_name_without_extension
 
