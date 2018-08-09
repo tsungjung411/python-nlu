@@ -38,7 +38,18 @@ class Concept:
         self.end = end
         self.entity = entity
         self.type = concept_type
+        
+        if concept_values == None:
+            concept_values = {}
+        # end-of-if
         self.concept_values = concept_values
+    # end-of-def
+    
+    def sign(self, tagger):
+        '''
+        Signs the name of the handled tagger
+        '''
+        self.concept_values['tagger'] = tagger
     # end-of-def
     
     def __eq__(self, other):
@@ -82,15 +93,49 @@ class Concept:
     # end-of-if
     
     def __repr__(self):
-        if self.type == None:
+        return self.__deep_repr__(self)
+    # end-of-def
+    
+    def __deep_repr__(self, concept, indent = '│   '):
+        
+        if concept.type == None:
             return "[{}:{}] {}".format(
-                self.start, self.end, 
-                self.entity)
+                concept.start, concept.end, concept.entity)
         else:
-            return "[{}:{}] {} ({}): {}".format(
-                self.start, self.end, 
-                self.entity, self.type, 
-                str(self.concept_values))
+            has_sub_concept = False
+            for key, value in concept.concept_values.items():
+                if type(value) == Concept:
+                    has_sub_concept = True
+                    break
+                # end-of-if  
+            # end-of-for
+
+            if has_sub_concept:
+                output = '[{}:{}] {} ({}){{'.format(
+                    concept.start, concept.end,
+                    concept.entity, concept.type)
+                
+                indent += '   '
+                for key, value in concept.concept_values.items():
+                    if type(value) == Concept:
+                        output += '\n {}- {}:{}'.format(
+                            indent, key, concept.__deep_repr__(value, indent))
+                    elif type(value) == str:
+                        output += '\n {}- {}: ''{}'''.format(
+                            indent, key, value)
+                    else:
+                        output += '\n {}- {}: {}'.format(
+                            indent, key, str(value))
+                    # end-of-if
+                # end-of-for
+                output += '\n {}}}'.format(indent)
+                return output
+            else:
+                return "[{}:{}] {} ({}){} ".format(
+                    concept.start, concept.end,
+                    concept.entity, concept.type, 
+                    str(concept.concept_values))
+            # end-of-if
         # end-of-if
     # end-of-def
     

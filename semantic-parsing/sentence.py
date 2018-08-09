@@ -213,18 +213,6 @@ class Sentence(list):
         return deleted_flag
     # end-of-def
     
-    def get_prefix_concept_list(self, index, *grabbed_concept_type_list_in_tuple):
-        return self.__get_concept_list(
-            self.__prefix_concept_list[index],
-            *grabbed_concept_type_list_in_tuple)
-    # end-of-def
-    
-    def get_suffix_concept_list(self, index, *grabbed_concept_type_list_in_tuple):
-        return self.__get_concept_list(
-            self.__suffix_concept_list[index],
-            *grabbed_concept_type_list_in_tuple)
-    # end-of-def
-    
     def __get_concept_list(self, internal_concept_list, *grabbed_concept_type_list_in_tuple):
         '''
         Gets the concept list which are satisfied with:
@@ -263,6 +251,22 @@ class Sentence(list):
         return concept_list
     # end-of-def
     
+    def get_prefix_concept_list(self, index, *grabbed_concept_type_list_in_tuple):
+        # index, index+1, index+2, ..., index+n
+        # is compatible with one of concepts in the given list 
+        return self.__get_concept_list(
+            self.__prefix_concept_list[index],
+            *grabbed_concept_type_list_in_tuple)
+    # end-of-def
+    
+    def get_suffix_concept_list(self, index, *grabbed_concept_type_list_in_tuple):
+        # index-n, ..., index-2, index-1, index
+        # is compatible with one of concepts in the given list 
+        return self.__get_concept_list(
+            self.__suffix_concept_list[index],
+            *grabbed_concept_type_list_in_tuple)
+    # end-of-def
+    
     def get_prefix_dominated_concept(self, index, *concept_type_list_in_tuple):
         '''
         Gets the dominator from the concept list which are satisfied 
@@ -292,10 +296,13 @@ class Sentence(list):
             # finds the max end
             concept_dominator = prefix_concept_list[0]
             max_end = prefix_concept_list[0].end
+            
             for idx in range(1, len(prefix_concept_list)):
                 concept = prefix_concept_list[idx]
+                
                 if concept.end > max_end:
                     concept_dominator = concept
+                    max_end = concept.end
                 # end-of-if
             # end-of-for
             return concept_dominator
@@ -334,10 +341,13 @@ class Sentence(list):
             # finds the min start
             concept_dominator = suffix_concept_list[0]
             min_start = suffix_concept_list[0].start
+            
             for idx in range(1, len(suffix_concept_list)):
                 concept = suffix_concept_list[idx]
+                
                 if concept.start < min_start:
                     concept_dominator = concept
+                    min_start = concept.start
                 # end-of-if
             # end-of-for
             return concept_dominator
