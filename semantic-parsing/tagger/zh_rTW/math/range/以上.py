@@ -1,4 +1,4 @@
-from tagger.math.range.gt_eq_prerange import _GtEqPrerange
+from tagger.math.range._gt_eq_prerange import _GtEqPrerange
 
 class 以上(_GtEqPrerange):
     '''

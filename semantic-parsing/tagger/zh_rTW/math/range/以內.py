@@ -1,4 +1,4 @@
-from tagger.math.range.lt_eq_prerange import _LtEqPrerange
+from tagger.math.range._lt_eq_prerange import _LtEqPrerange
 
 class 以內(_LtEqPrerange):
     '''

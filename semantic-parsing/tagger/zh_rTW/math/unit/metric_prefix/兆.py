@@ -1,4 +1,4 @@
-from tagger.zh_rTW.math.unit.metric_prefix.metric_prefix_unit import _MetricPrefixUnit
+from tagger.zh_rTW.math.unit.metric_prefix._metric_prefix_unit import _MetricPrefixUnit
 from tagger.zh_rTW.math.unit.metric_prefix.億 import 億
 
 class 兆(_MetricPrefixUnit):

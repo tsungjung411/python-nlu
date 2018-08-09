@@ -1,4 +1,4 @@
-from tagger.zh_rTW.math.unit.metric_prefix.metric_prefix_unit import _MetricPrefixUnit
+from tagger.zh_rTW.math.unit.metric_prefix._metric_prefix_unit import _MetricPrefixUnit
 from tagger.zh_rTW.math.unit.metric_prefix.百 import 百
 
 class 千(_MetricPrefixUnit):
